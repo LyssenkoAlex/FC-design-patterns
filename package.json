@@ -1,0 +1,42 @@
+{
+  "name": "hometask",
+  "version": "1.0.0",
+  "description": "News API application with es2015 features",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ViktoriyaVorozhun/FC-es2016-plus.git"
+  },
+  "scripts": {
+    "dev": "webpack-dev-server --open --config webpack.development.js",
+    "prod": "webpack --config webpack.production.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ViktoriyaVorozhun/FC-es2016-plus/issues"
+  },
+  "homepage": "https://github.com/ViktoriyaVorozhun/FC-es2016-plus#readme",
+  "dependencies": {
+    "@babel/plugin-syntax-dynamic-import": "^7.0.0",
+    "@babel/polyfill": "^7.0.0",
+    "css-loader": "^1.0.1",
+    "css-url-relative-plugin": "^1.0.0",
+    "es6-promise": "^4.2.5",
+    "isomorphic-fetch": "^2.2.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.1.5",
+    "@babel/core": "^7.1.6",
+    "@babel/preset-env": "^7.1.6",
+    "babel-loader": "^8.0.4",
+    "file-loader": "^2.0.0",
+    "node-sass": "^4.10.0",
+    "resolve-url-loader": "^3.0.0",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.26.1",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.10"
+  }
+}
