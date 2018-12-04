@@ -1,3 +1,4 @@
+//Model
 import {Article} from "./Article.js";
 import '../scss/news.scss';
 
@@ -21,3 +22,11 @@ export class ArticleFactory {
         return articles;
     }
 }
+
+//Proxy
+export const articleFactoryProxy = new Proxy(ArticleFactory.createArticles, {
+    apply: function(target, thisArg, argumentsList) {
+        console.log(`Logging create articles arguments: ${argumentsList}`);
+        return target.apply(thisArg, argumentsList);
+    }
+});

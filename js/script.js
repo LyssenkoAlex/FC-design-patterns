@@ -1,6 +1,6 @@
+//View
 import '../scss/main.scss';
 import "@babel/polyfill";
-import {ModalWindow} from "./Modal";
 
 window.onload = function() {
     //Event Listener - submit class button click
@@ -10,7 +10,6 @@ window.onload = function() {
         import('./News.js').then(module => {
             createNews(module, getInputValue('country'), getInputValue('category'), getInputValue('pagesize'));
         });
-
     };
 
     async function createNews(module, country, category, pagesize) {
@@ -18,12 +17,15 @@ window.onload = function() {
         hideTitle();
 
         try {
-            let articles = await module.ArticleFactory.createArticles(country, category, pagesize);
+            let articles = await module.articleFactoryProxy(country, category, pagesize);
             if(articles){
-                for(let val of articles){
-                    newsContainer.appendChild(val.generateArticle())
-                }
-                addShowMoreClickListener();
+                import('./ArticleView.js').then(articleViewModule => {
+                    for(let val of articles){
+                        newsContainer.appendChild(articleViewModule.ArticleView.generateArticle(val));
+                    }
+                    addShowMoreClickListener();
+                });
+                showTitle();
             }
         } catch (err) {
             import('./Modal.js').then(module => {
@@ -31,9 +33,7 @@ window.onload = function() {
                 modal.show(err);
             });
         }
-        showTitle();
         enableButton('.submit');
-
     }
 
     //Get input value from UI

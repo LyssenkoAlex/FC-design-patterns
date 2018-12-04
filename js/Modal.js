@@ -1,3 +1,4 @@
+//View
 import '../scss/modal-window.scss';
 
 //Singleton
