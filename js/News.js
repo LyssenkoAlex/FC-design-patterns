@@ -1,23 +1,15 @@
 import {Article} from "./Article.js";
 import '../scss/news.scss';
 
-export class News {
-    constructor(country, category, pagesize){
-        this.country = country;
-        this.category = category;
-        this.pagesize = pagesize;
-    };
-
-    //Get API call address
-    get formApi(){
-        return (`https://newsapia.org/v2/top-headlines?country=${this.country}&category=${this.category}&sortBy=popularity&pageSize=${this.pagesize}&apiKey=59e5ec14708e4b768acc8a0664f22906`);
-    }
+//Factory
+export class ArticleFactory {
 
     //Get json data from API
-    getData(){
-        return fetch(this.formApi)
+    static createArticles(country, category, pagesize){
+        let formApi = `https://newsapi.org/v2/top-headlines?country=${country}&category=${category}&sortBy=popularity&pageSize=${pagesize}&apiKey=59e5ec14708e4b768acc8a0664f22906`;
+        return fetch(formApi)
             .then(response => response.json())
-            .then(newsjson => News.handleJSON(newsjson));
+            .then(newsjson => ArticleFactory.handleJSON(newsjson));
     }
 
     //Form articles list

@@ -8,18 +8,17 @@ window.onload = function() {
         e.preventDefault();
         disableButton(this);
         import('./News.js').then(module => {
-            let news = new module.News(getInputValue('country'), getInputValue('category'), getInputValue('pagesize'));
-            createNews(news);
+            createNews(module, getInputValue('country'), getInputValue('category'), getInputValue('pagesize'));
         });
 
     };
 
-    async function createNews(news) {
+    async function createNews(module, country, category, pagesize) {
         let newsContainer = getNewsContainer();
         hideTitle();
 
         try {
-            let articles = await news.getData();
+            let articles = await module.ArticleFactory.createArticles(country, category, pagesize);
             if(articles){
                 for(let val of articles){
                     newsContainer.appendChild(val.generateArticle())
