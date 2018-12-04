@@ -4,9 +4,14 @@ const path = require('path');
 
 module.exports = {
     mode: 'production',
-    entry: ["./js/script"],
+    entry: {
+        main: "./js/script"
+    },
     output: {
-        filename: "build.js"
+        filename: '[name].bundle.js',
+        chunkFilename: "[name].bundle.js",
+        path: path.resolve(__dirname, 'dist'),
+        publicPath: 'dist/'
     },
     module: {
         rules: [{

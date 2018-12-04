@@ -4,9 +4,14 @@ const path = require('path');
 
 module.exports = {
     mode: 'development',
-    entry: ["./js/script"],
+    entry: {
+        main: "./js/script"
+    },
     output: {
-        filename: "build.js"
+        filename: '[name].bundle.js',
+        chunkFilename: "[name].bundle.js",
+        path: path.resolve(__dirname, 'dist'),
+        publicPath: 'dist/'
     },
     watch: true,
     watchOptions: {
@@ -55,11 +60,12 @@ module.exports = {
         ]
     },
     plugins: [
-        new webpack.HotModuleReplacementPlugin()
+        new webpack.HotModuleReplacementPlugin(),
     ],
     devServer: {
         host: 'localhost',
         port: '8080',
         hot: true
-    }
+    },
+
 };

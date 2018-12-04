@@ -1,19 +1,23 @@
-import {News} from "./News.js";
 import '../scss/main.scss';
 import "@babel/polyfill";
+import {ModalWindow} from "./Modal";
 
 window.onload = function() {
     //Event Listener - submit class button click
     document.querySelector('.submit').onclick = function (e) {
         e.preventDefault();
         disableButton(this);
-        let news = new News(getInputValue('country'), getInputValue('category'), getInputValue('pagesize'));
-        createNews(news);
+        import('./News.js').then(module => {
+            let news = new module.News(getInputValue('country'), getInputValue('category'), getInputValue('pagesize'));
+            createNews(news);
+        });
+
     };
 
     async function createNews(news) {
         let newsContainer = getNewsContainer();
         hideTitle();
+
         try {
             let articles = await news.getData();
             if(articles){
@@ -23,8 +27,10 @@ window.onload = function() {
                 addShowMoreClickListener();
             }
         } catch (err) {
-            console.log(err);
-            showAlertMessage();
+            import('./Modal.js').then(module => {
+                let modal = new module.ModalWindow();
+                modal.show(err);
+            });
         }
         showTitle();
         enableButton('.submit');
@@ -77,5 +83,6 @@ window.onload = function() {
     function showAlertMessage() {
         document.querySelector('.news__title').innerHTML = 'Something went wrong. Try again later';
     }
+
 
 };

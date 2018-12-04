@@ -1,4 +1,5 @@
 import {Article} from "./Article.js";
+import '../scss/news.scss';
 
 export class News {
     constructor(country, category, pagesize){
@@ -9,7 +10,7 @@ export class News {
 
     //Get API call address
     get formApi(){
-        return (`https://newsapi.org/v2/top-headlines?country=${this.country}&category=${this.category}&sortBy=popularity&pageSize=${this.pagesize}&apiKey=59e5ec14708e4b768acc8a0664f22906`);
+        return (`https://newsapia.org/v2/top-headlines?country=${this.country}&category=${this.category}&sortBy=popularity&pageSize=${this.pagesize}&apiKey=59e5ec14708e4b768acc8a0664f22906`);
     }
 
     //Get json data from API

@@ -8,7 +8,7 @@
     "url": "git+https://github.com/ViktoriyaVorozhun/FC-es2016-plus.git"
   },
   "scripts": {
-    "dev": "webpack-dev-server --open --config webpack.development.js",
+    "dev": "webpack --config webpack.development.js",
     "prod": "webpack --config webpack.production.js"
   },
   "author": "",
@@ -23,12 +23,14 @@
     "css-loader": "^1.0.1",
     "css-url-relative-plugin": "^1.0.0",
     "es6-promise": "^4.2.5",
-    "isomorphic-fetch": "^2.2.1"
+    "isomorphic-fetch": "^2.2.1",
+    "path": "^0.12.7"
   },
   "devDependencies": {
     "@babel/cli": "^7.1.5",
     "@babel/core": "^7.1.6",
     "@babel/preset-env": "^7.1.6",
+    "@types/node": "^10.12.12",
     "babel-loader": "^8.0.4",
     "file-loader": "^2.0.0",
     "node-sass": "^4.10.0",
