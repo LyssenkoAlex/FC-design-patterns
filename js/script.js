@@ -2,7 +2,7 @@
 import '../scss/main.scss';
 import "@babel/polyfill";
 
-window.onload = function() {
+window.onload = function () {
     //Event Listener - submit class button click
     document.querySelector('.submit').onclick = function (e) {
         e.preventDefault();
@@ -18,20 +18,26 @@ window.onload = function() {
 
         try {
             let articles = await module.articleFactoryProxy(country, category, pagesize);
-            if(articles){
-                import('./ArticleView.js').then(articleViewModule => {
-                    for(let val of articles){
-                        newsContainer.appendChild(articleViewModule.ArticleView.generateArticle(val));
-                    }
-                    addShowMoreClickListener();
-                });
+            if (articles) {
+                let articleViewModule = await import('./ArticleView.js');
+                for (let val of articles) {
+                    newsContainer.appendChild(articleViewModule.ArticleView.generateArticle(val));
+                }
+                addShowMoreClickListener();
+
+                // import('./ArticleView.js').then(articleViewModule => {
+                //
+                // });
                 showTitle();
             }
         } catch (err) {
-            import('./Modal.js').then(module => {
-                let modal = new module.ModalWindow();
-                modal.show(err);
-            });
+            let module = await import('./Modal.js');
+            let modal = new module.ModalWindow();
+            modal.show(err);
+            // import('./Modal.js').then(module => {
+            //     let modal = new module.ModalWindow();
+            //     modal.show(err);
+            // });
         }
         enableButton('.submit');
     }
@@ -71,7 +77,7 @@ window.onload = function() {
 
     //Event listener - show more button click
     function addShowMoreClickListener() {
-        for(let val of document.querySelectorAll('.article_show-more')){
+        for (let val of document.querySelectorAll('.article_show-more')) {
             val.onclick = function () {
                 this.parentNode.querySelector('.article__body').style.display = 'block';
                 this.parentNode.querySelector('.article_show-more').style.display = 'none';
